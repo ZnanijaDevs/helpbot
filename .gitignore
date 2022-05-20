@@ -1,0 +1,6 @@
+__pycache__/
+.venv/
+__old/
+__env__.*
+logger.log
+/clean_db.py
