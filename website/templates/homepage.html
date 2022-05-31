@@ -11,16 +11,14 @@
     <img src="/static/robot.gif" draggable="false">
     <div class="ml-4">
       <h1 class="font-weight-bold">helpbot</h1>
-      <div class="text-muted">
-        <strong>Server time: </strong>{{ server_time }}
-      </div>
-      <div class="text-muted">
-        <strong>Mode: </strong>{{ mode }}
-      </div>
+      <div>Ultimate Slack bot for Znanija SpamOuts team</div>
+      <div class="text-muted mt-3"><b>Server time: </b>{{ server_time }}</div>
+      <div class="text-muted"><b>Mode: </b>{{ mode }}</div>
       <div class="mt-3">
-        <a target="_blank" href="{{ source_url }}">
-          <button class="btn btn-dark">GitHub</button>
+        <a title="Slack" class="btn {{ 'btn-danger' if messages_count > 50 else 'btn-success' }}" href="https://spamouts.slack.com/" role="button">
+          {{ messages_count }} messages
         </a>
+        <a target="_blank" class="btn btn-dark" role="button" href="{{ source_url }}">GitHub</a>
       </div>
     </div>
   </div>
