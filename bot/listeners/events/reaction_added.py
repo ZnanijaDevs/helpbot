@@ -76,3 +76,5 @@ async def handle_reaction_added_event(event, context):
             ts_to_date(event_ts),
             message_text
         ], 2)
+    elif channel == channels['MODERATORS']:
+        await delete_message(channel_id=channel, ts=message_ts)

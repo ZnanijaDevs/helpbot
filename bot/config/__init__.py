@@ -6,7 +6,8 @@ import os
 channels = {
     'TO_DELETE': os.environ['CHANNEL_TO_DELETE_ID'],
     'ANTISPAMERS': os.environ['CHANNEL_ANTISPAMERS_ID'],
-    'HELP': os.environ['CHANNEL_HELP_ID']
+    'HELP': os.environ['CHANNEL_HELP_ID'],
+    'MODERATORS': os.environ['CHANNEL_MODERATORS_ID']
 }
 
 admins = [

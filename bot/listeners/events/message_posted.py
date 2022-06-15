@@ -23,9 +23,18 @@ async def save_message(message, context, logger):
 
     # Fetch user data
     user_data = await client.execute_async(query="""
-        query GetUser($id: ID!) { user(id: $id) {
-            nick rank {name} points answers {count} avatar {url} thanks {count} created helpedUsersCount
-        } }
+        query GetUser($id: ID!) {
+            user(id: $id) {
+                nick
+                rank {name}
+                points
+                answers {count}
+                avatar {url}
+                thanks {count}
+                created
+                helpedUsersCount
+            }
+        }
     """, variables={'id': encoded_user_id})
 
     if not user_data['data'] or not user_data['data']['user']:

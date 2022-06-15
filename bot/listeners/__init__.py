@@ -18,4 +18,4 @@ def register(path: str):
 
 modules = glob.glob(f"{os.path.dirname(__file__)}/**/*.py", recursive=True)
 for module in modules:
-    register(re.sub(r".+(?=bot)|\.py", '', module))
+    register(re.sub(r".+(?=bot(?!_))|\.py", '', module))
