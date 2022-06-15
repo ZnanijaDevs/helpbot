@@ -26,14 +26,20 @@ async def send_to_moderators(message):
             'type': 'section',
             'text': {
                 'type': 'mrkdwn',
-                'text': f"*{subject}, ответы: {answers_count}* <https://znanija.com/task/{task_id}> {reason}\n{question['short_content']}"
+                'text': f"*{subject}, ответы: {answers_count}* <https://znanija.com/task/{task_id}> {reason}"
             }
         }, {
-            'type': 'context',
-            'elements': [{
+            'type': 'section',
+            'text': {
                 'type': 'mrkdwn',
-                'text': f"<@{message['user']}>"
-            }]
+                'text': question['short_content']
+            }
+        }, {
+		    'type': 'context',
+		    'elements': [{
+			    'type': 'mrkdwn',
+			    'text': f"Отправлено <@{message['user']}>"
+		    }]
         }],
         text='На исправление!'
     )
