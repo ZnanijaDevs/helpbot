@@ -26,5 +26,5 @@ admins = [
 DANGER_REACTIONS_REGEX = r"check|2020|completed|peacock|reasonable|mary_cheek|^(bug|canc_noj)$"
 
 TASK_ID_REGEX = r"(?<=\/task\/)\d+(?=\||>|\?)"
-PROFILE_LINK_REGEX = r"(?<=<)[A-Za-z:\/]+znanija\.com\/((app\/profile\/)|(profil\/\w+-)|(users\/(user_content|redirect_user)\/))\d+"
+PROFILE_LINK_REGEX = r"(?<=<)[A-Za-z:\/]+(znanija\.com|brainly-ru\.brainly\.tech)\/((app\/profile\/)|(profil\/\w+-)|(users\/(user_content|redirect_user)\/))\d+"
 DELETE_REASON_REGEX = r"(?<=\|)[А-Яа-я0-9]+|.+(?=<)|(?<=>)(.|\n)+?[А-Яа-я0-9\s]+"
