@@ -7,8 +7,12 @@ from bot.config import DELETE_REASON_REGEX, TASK_ID_REGEX
 
 tz = pytz.timezone('Europe/Moscow')
 
-def ts_to_date(timestamp: str) -> str:
-    return datetime.fromtimestamp(float(timestamp), tz).strftime('%d.%m.%Y %H:%M:%S')
+
+def ts_to_date(timestamp: Union[str, float]) -> str:
+    if isinstance(timestamp, str):
+        timestamp = float(timestamp)
+
+    return datetime.fromtimestamp(timestamp, tz).strftime('%d.%m.%Y %H:%M:%S')
 
 
 def get_delete_reason(text: str) -> str:

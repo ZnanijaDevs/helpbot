@@ -1,13 +1,16 @@
+from time import time
 import re
 from bot import bot
 from bot.config import channels
 from bot.utils.slack_messages import delete_message
 from bot.utils import find_task_id
 from bot.utils.brainly_graphql import get_question
+from bot.utils import ts_to_date
+from bot.database.sheets import sheet
 
 
 @bot.message(re.compile(r"на исправление", re.IGNORECASE))
-async def send_to_moderators(message):
+async def send_to_moderators(message, context):
     task_id = find_task_id(message['text'])
     reason = re.search(r"(?<=\()[^)]+", message['text'], re.IGNORECASE)
 
@@ -45,3 +48,12 @@ async def send_to_moderators(message):
     )
 
     await delete_message(channel_id=message['channel'], ts=message['ts'])
+
+    sheet.worksheet('Отправленные на исправление - Лог').insert_row([
+        ts_to_date(time()),
+        context['user_nick'],
+        f"https://znanija.com/task/{task_id}",
+        subject,
+        reason,
+        message['text']
+    ], 2)
