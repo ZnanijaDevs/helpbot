@@ -26,7 +26,7 @@ async def send_to_moderators(message):
             'type': 'section',
             'text': {
                 'type': 'mrkdwn',
-                'text': f"*{subject}, ответы: {answers_count}* <https://znanija.com/task/{task_id}> {reason}"
+                'text': f"*{subject}, ответы: {answers_count}* <https://znanija.com/task/{task_id}>\n{reason}"
             }
         }, {
             'type': 'section',
