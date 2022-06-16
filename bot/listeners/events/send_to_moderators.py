@@ -3,9 +3,8 @@ import re
 from bot import bot
 from bot.config import channels
 from bot.utils.slack_messages import delete_message
-from bot.utils import find_task_id
+from bot.utils import find_task_id, ts_to_date
 from bot.utils.brainly_graphql import get_question
-from bot.utils import ts_to_date
 from bot.database.sheets import sheet
 
 

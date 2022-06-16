@@ -11,7 +11,7 @@ async def get_extra_info(context, payload, next):
         context['user_nick'] = slack_user['nick']
 
 
-    if payload['type'] == 'reaction_added':
+    if payload.get('type') == 'reaction_added':
         item_ts = payload['item']['ts']
 
         messages = await bot.client.conversations_history(
