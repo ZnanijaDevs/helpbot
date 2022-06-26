@@ -1,5 +1,4 @@
 import re
-from typing import Union
 from datetime import datetime
 import pytz
 from bot.config import DELETE_REASON_REGEX, TASK_ID_REGEX
@@ -8,7 +7,7 @@ from bot.config import DELETE_REASON_REGEX, TASK_ID_REGEX
 tz = pytz.timezone('Europe/Moscow')
 
 
-def ts_to_date(timestamp: Union[str, float]) -> str:
+def ts_to_date(timestamp: str | float) -> str:
     if isinstance(timestamp, str):
         timestamp = float(timestamp)
 
@@ -24,7 +23,7 @@ def get_delete_reason(text: str) -> str:
     return re.sub(r"(^,|-)\s*|\.$", '', match.group()).strip().capitalize()
 
 
-def find_task_id(text: str) -> Union[None, int]:
+def find_task_id(text: str) -> int | None:
     task_id = re.search(TASK_ID_REGEX, text)
 
     if task_id is None:

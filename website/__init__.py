@@ -1,6 +1,17 @@
-# Init website instance & routes here
+from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
+from fastapi.middleware.cors import CORSMiddleware
 
-from website.app import app
-import website.routes.homepage
-import website.routes.delete_message_by_user
-import website.routes.get_logs
+# Init FastAPI app
+app = FastAPI(docs_url=None)
+
+# Mount templates
+templates = Jinja2Templates(directory='website/templates')
+
+# Add CORS middleware
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=['*'],
+    allow_methods=['GET', 'POST']
+)

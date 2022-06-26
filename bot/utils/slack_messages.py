@@ -1,9 +1,8 @@
 import os
-from typing import Optional
 from bot import bot
 
 
-async def delete_message(channel_id: str, ts: str, clear_threads: Optional[bool]=True):
+async def delete_message(channel_id: str, ts: str, clear_threads: bool | None = True):
     """ Deletes a message in Slack. """
     if clear_threads:
         replies = await bot.client.conversations_replies(channel=channel_id, ts=ts)

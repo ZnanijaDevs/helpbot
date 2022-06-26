@@ -1,7 +1,7 @@
 import os
 import time
 from fastapi.responses import FileResponse
-from website.app import app
+from website import app
 
 
 @app.get(os.environ['LOGGER_PUBLIC_ENDPOINT'])

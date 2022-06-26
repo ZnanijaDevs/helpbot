@@ -1,10 +1,11 @@
 import os
 from fastapi import status, Response
 from pydantic import conint
+
 from bot import bot
 from bot.config import channels
 from bot.database import redis
-from website.app import app
+from website import app
 
 
 @app.post('/delete_user/{user_id}')

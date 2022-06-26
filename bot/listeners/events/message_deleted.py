@@ -4,6 +4,7 @@ from bot.database import redis
 from bot.config import channels, PROFILE_LINK_REGEX
 from bot.utils import get_delete_reason
 
+
 async def filter_messages(event):
     if event.get('subtype') != 'message_deleted' or event['channel'] != channels['TO_DELETE']:
         return

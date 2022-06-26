@@ -1,10 +1,11 @@
-from fastapi import Request
-from bot import events_handler
-from website.app import app
+from website import app
 
-# Init Slack events listeners
+
+# Init Slack listeners
 import bot.listeners
 
-@app.post("/slack_events")
-async def handle_slack_events(request: Request):
-    return await events_handler.handle(request)
+# Init website routes
+import website.routes.homepage
+import website.routes.slack_events
+import website.routes.get_logs
+import website.routes.delete_message_by_user
