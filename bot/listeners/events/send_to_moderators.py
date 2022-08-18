@@ -4,7 +4,7 @@ from bot import bot
 from bot.config import channels
 from bot.utils.slack_messages import delete_message
 from bot.utils import find_task_id, ts_to_date
-from bot.utils.brainly_graphql import get_question
+from bot.utils.get_question import get_question
 from bot.database.sheets import sheet
 
 
@@ -16,9 +16,12 @@ async def send_to_moderators(message, context):
     if task_id is None or reason is None:
         return
 
-    question = await get_question(task_id)
+    question = get_question(task_id)
 
-    subject = question['subject']['name']
+    if question is None:
+        return
+
+    subject = question['subject']
     answers_count = question['answers_count']
     reason = reason.group().strip()
 
@@ -28,7 +31,7 @@ async def send_to_moderators(message, context):
             'type': 'section',
             'text': {
                 'type': 'mrkdwn',
-                'text': f"*{subject}, ответы: {answers_count}* <https://znanija.com/task/{task_id}>\n{reason}"
+                'text': f"*{subject}, ответы: {answers_count}* <{question['link']}>\n{reason}"
             }
         }, {
             'type': 'section',
@@ -51,7 +54,7 @@ async def send_to_moderators(message, context):
     sheet.worksheet('Отправленные на исправление - Лог').insert_row([
         ts_to_date(time()),
         context['user_nick'],
-        f"https://znanija.com/task/{task_id}",
+        question['link'],
         subject,
         reason,
         message['text']

@@ -1,7 +1,7 @@
 import re
 from bot import bot
 from bot.config import channels
-from bot.utils.brainly_graphql import get_question
+from bot.utils.get_question import get_question
 from bot.utils.slack_messages import delete_message
 from bot.utils import find_task_id
 
@@ -12,13 +12,15 @@ async def send_to_antispamers(message):
     if task_id is None:
         return
 
-    question = await get_question(task_id)
+    question = get_question(task_id)
+    if question is None:
+        return
 
     message_blocks = [{
         'type': 'section',
         'text': {
             'type': 'mrkdwn',
-            'text': f":lower_left_ballpoint_pen: *{question['subject']['name']}* *<https://znanija.com/task/{task_id}>*"
+            'text': f":lower_left_ballpoint_pen: *{question['subject']}* *{question['link']}*"
         }
     }, {
         'type': 'section',
