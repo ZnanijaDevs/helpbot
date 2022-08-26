@@ -2,7 +2,7 @@ import os
 import requests
 
 
-ENDPOINT_URL = 'https://br-helper.com/brainly/task'
+ENDPOINT_URL = 'https://tools.br-helper.com/brainly/task'
 TOOLS_AUTH_TOKEN = os.environ['TOOLS_AUTH_TOKEN']
 
 

@@ -3,3 +3,4 @@ __pycache__/
 __old/
 __env__.*
 logger.log
+fly.toml
