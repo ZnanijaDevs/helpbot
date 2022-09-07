@@ -1,5 +1,7 @@
 from website import app
 
+# Init Sentry
+import init_sentry
 
 # Init Slack listeners
 import bot.listeners
