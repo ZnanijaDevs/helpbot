@@ -12,9 +12,11 @@ async def send_to_antispamers(message):
     if task_id is None:
         return
 
-    question = get_question(task_id)
-    if question is None:
+    question_data = get_question(task_id)
+    if question_data is None:
         return
+
+    question = question_data['task']
 
     message_blocks = [{
         'type': 'section',
@@ -26,7 +28,7 @@ async def send_to_antispamers(message):
         'type': 'section',
         'text': {
             'type': 'mrkdwn',
-            'text': question['short_content']
+            'text': question['content']['short']
         }
     }, {
 		'type': 'context',
