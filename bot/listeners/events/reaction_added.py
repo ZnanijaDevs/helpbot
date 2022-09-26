@@ -8,15 +8,15 @@ from bot.database.sheets import sheet
 
 
 async def filter_messages(context) -> bool:
-    message = context['message']
+    message = context.get('message')
+
+    if message is None:
+        return False
 
     return 'pinned_to' not in message and 'subtype' not in message
 
 
-@bot.event(
-    'reaction_added',
-    matchers=[filter_messages]
-)
+@bot.event('reaction_added', matchers=[filter_messages])
 async def handle_reaction_added_event(event, context):
     reaction = event['reaction']
     user = context['user_data']

@@ -21,7 +21,7 @@ async def send_to_moderators(message, context):
     if question is None:
         return
 
-    subject = question['subject']
+    subject = question.get('subject', '')
     answers_count = question['answers_count']
     reason = reason.group().strip()
 
