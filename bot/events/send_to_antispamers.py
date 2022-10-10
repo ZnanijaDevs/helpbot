@@ -22,13 +22,13 @@ async def send_to_antispamers(message):
         'type': 'section',
         'text': {
             'type': 'mrkdwn',
-            'text': f":lower_left_ballpoint_pen: *{question.get('subject', '')}* *{question['link']}*"
+            'text': f":lower_left_ballpoint_pen: {question.get('subject', '')} {question['link']}"
         }
     }, {
         'type': 'section',
         'text': {
             'type': 'mrkdwn',
-            'text': question['content']['short']
+            'text': question['content']['short'] or '-'
         }
     }, {
 		'type': 'context',

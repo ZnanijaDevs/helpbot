@@ -1,11 +1,11 @@
-import os
+from getenv import env
 
 
 channels = {
-    'TO_DELETE': os.environ['CHANNEL_TO_DELETE_ID'],
-    'ANTISPAMERS': os.environ['CHANNEL_ANTISPAMERS_ID'],
-    'HELP': os.environ['CHANNEL_HELP_ID'],
-    'MODERATORS': os.environ['CHANNEL_MODERATORS_ID']
+    'TO_DELETE': env('CHANNEL_TO_DELETE_ID'),
+    'ANTISPAMERS': env('CHANNEL_ANTISPAMERS_ID'),
+    'HELP': env('CHANNEL_HELP_ID'),
+    'MODERATORS': env('CHANNEL_MODERATORS_ID')
 }
 
 admins = [

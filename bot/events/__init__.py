@@ -13,7 +13,7 @@ def register(path: str):
     module_name = '.'.join(path_parts)
     importlib.import_module(module_name)
 
-    print(f"[EVENT LISTENER imported] {module_name}")
+    print(f"[Slack bot] event listener imported: {module_name}")
 
 
 modules = glob.glob(f"{os.path.dirname(__file__)}/**/*.py", recursive=True)

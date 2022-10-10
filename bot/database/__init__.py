@@ -1,11 +1,12 @@
-import os
 import redis as r
+from getenv import env
 
 
 redis = r.Redis(
-    host=os.environ['REDIS_HOST'],
-    port=os.environ['REDIS_PORT'],
-    password=os.environ['REDIS_PASS'],
-    username=os.environ['REDIS_USERNAME'],
+    host=env('REDIS_HOST'),
+    port=env('REDIS_PORT'),
+    password=env('REDIS_PASS'),
+    username=env('REDIS_USERNAME'),
     db=0,
+    max_connections=15
 )

@@ -1,13 +1,13 @@
-from website import app
+# pylint: disable=unused-import
+from webapp import app
 
 # Init Sentry
 import init_sentry
 
-# Init Slack listeners
-import bot.listeners
+# Init Slack event listeners
+import bot.events
 
-# Init website routes
-import website.routes.homepage
-import website.routes.slack_events
-import website.routes.get_logs
-import website.routes.delete_message_by_user
+# Init webapp routes
+import webapp.routes.homepage
+import webapp.routes.slack_events
+import webapp.routes.delete_message_by_user

@@ -1,7 +1,7 @@
 from fastapi import Request
 
 from bot import events_handler
-from website import app
+from webapp import app
 
 
 @app.post('/slack_events')

@@ -8,10 +8,9 @@
   <div class="d-flex align-items-center h-100 justify-content-center">
     <div class="ml-4 d-flex align-items-center flex-column">
       <h1 class="font-weight-bold">helpbot</h1>
-      <div>Ultimate Slack bot for Znanija SpamOuts team</div>
-      <div class="text-muted mt-3"><b>Server time: </b>{{ server_time }}</div>
-      <div class="text-muted"><b>Mode: </b>{{ mode }}</div>
-      <a title="Slack" class="mt-3 btn {{ 'btn-danger' if messages_count > 50 else 'btn-success' }}" href="https://spamouts.slack.com/" role="button">
+      <div>Ultimate Slack bot for our SpamOuts team</div>
+      <div class="text-muted mb-2"><b>Mode: </b>{{ mode }}</div>
+      <a title="Slack" class="btn {{ 'btn-danger' if messages_count > 50 else 'btn-info' }}" href="https://spamouts.slack.com/" role="button">
         {{ messages_count }} messages
       </a>
     </div>

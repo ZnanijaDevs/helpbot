@@ -16,13 +16,15 @@ async def send_to_moderators(message, context):
     if task_id is None or reason is None:
         return
 
-    question = get_question(task_id)
+    question_data = get_question(task_id)
 
-    if question is None:
+    if question_data is None:
         return
 
+    question = question_data['task']
+    answers_count = question_data['responses_count']
+
     subject = question.get('subject', '')
-    answers_count = question['answers_count']
     reason = reason.group().strip()
 
     await bot.client.chat_postMessage(
@@ -37,7 +39,7 @@ async def send_to_moderators(message, context):
             'type': 'section',
             'text': {
                 'type': 'mrkdwn',
-                'text': question['short_content']
+                'text': question['content']['filtered']
             }
         }, {
 		    'type': 'context',

@@ -8,6 +8,7 @@ tz = pytz.timezone('Europe/Moscow')
 
 
 def ts_to_date(timestamp: str | float) -> str:
+    """Transform Slack timestamp to date"""
     if isinstance(timestamp, str):
         timestamp = float(timestamp)
 
@@ -15,6 +16,7 @@ def ts_to_date(timestamp: str | float) -> str:
 
 
 def get_delete_reason(text: str) -> str:
+    """Get deletion reason in the text"""
     match = re.search(DELETE_REASON_REGEX, text, re.IGNORECASE)
 
     if match is None:
@@ -24,6 +26,7 @@ def get_delete_reason(text: str) -> str:
 
 
 def find_task_id(text: str) -> int | None:
+    """Find task ID in the text"""
     task_id = re.search(TASK_ID_REGEX, text)
 
     if task_id is None:

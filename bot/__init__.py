@@ -3,7 +3,7 @@ from slack_bolt.async_app import AsyncApp
 from slack_bolt.adapter.fastapi.async_handler import AsyncSlackRequestHandler
 
 
-logging.basicConfig(filename='logger.log', filemode='w')
+logging.basicConfig()
 
 bot = AsyncApp(
     name='helpbot',

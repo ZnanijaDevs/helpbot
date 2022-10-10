@@ -1,9 +1,9 @@
-import os
 import requests
+from getenv import env
 
 
 ENDPOINT_URL = 'https://tools.br-helper.com/brainly/task'
-TOOLS_AUTH_TOKEN = os.environ['TOOLS_AUTH_TOKEN']
+TOOLS_AUTH_TOKEN = env('TOOLS_AUTH_TOKEN')
 
 
 def get_question(id: int) -> dict:

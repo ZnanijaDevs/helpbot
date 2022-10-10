@@ -1,5 +1,5 @@
-import os
 from bot import bot
+from getenv import env
 
 
 async def delete_message(channel_id: str, ts: str, clear_threads: bool | None = True):
@@ -11,7 +11,7 @@ async def delete_message(channel_id: str, ts: str, clear_threads: bool | None = 
                 continue
 
             await bot.client.chat_delete(
-                token=os.environ['SLACK_ADMIN_TOKEN'],
+                token=env('SLACK_ADMIN_TOKEN'),
                 ts=reply['ts'],
                 channel=channel_id
             )
@@ -19,5 +19,5 @@ async def delete_message(channel_id: str, ts: str, clear_threads: bool | None = 
     await bot.client.chat_delete(
         channel=channel_id,
         ts=ts,
-        token=os.environ['SLACK_ADMIN_TOKEN']
+        token=env('SLACK_ADMIN_TOKEN')
     )
