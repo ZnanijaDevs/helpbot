@@ -1,11 +1,18 @@
 import re
 from bot import bot
-from bot.config import PROFILE_LINK_REGEX
+from bot.config import PROFILE_LINK_REGEX, channels
 from bot.utils import get_delete_reason
 from bot.database import redis
 
 
-@bot.message(re.compile(PROFILE_LINK_REGEX))
+async def channel_is_to_delete(message) -> bool:
+    return message.get('channel') == channels['TO_DELETE']
+
+
+@bot.message(
+    re.compile(PROFILE_LINK_REGEX),
+    matchers=[channel_is_to_delete]
+)
 async def save_message(message, logger):
     profile_link = re.search(PROFILE_LINK_REGEX, message['text'])
 

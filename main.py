@@ -10,4 +10,4 @@ import bot.events
 # Init webapp routes
 import webapp.routes.homepage
 import webapp.routes.slack_events
-import webapp.routes.delete_message_by_user
+import webapp.routes.delete_user

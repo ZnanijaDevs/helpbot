@@ -4,4 +4,4 @@ __old/
 __env__.*
 *.log
 fly.toml
-.env.debug
+.env.*

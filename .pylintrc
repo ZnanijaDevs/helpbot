@@ -10,7 +10,8 @@ disable=
   invalid-name,
   trailing-whitespace,
   wildcard-import,
-  redefined-builtin
+  redefined-builtin,
+  missing-class-docstring
 
 [FORMAT]
 indent-string='    '

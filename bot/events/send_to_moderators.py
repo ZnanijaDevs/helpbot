@@ -1,5 +1,6 @@
 from time import time
 import re
+from slackblocks import Message, SectionBlock, ContextBlock, Text
 from bot import bot
 from bot.config import channels
 from bot.utils.slack_messages import delete_message
@@ -27,29 +28,15 @@ async def send_to_moderators(message, context):
     subject = question.get('subject', '')
     reason = reason.group().strip()
 
-    await bot.client.chat_postMessage(
+    await bot.client.chat_postMessage(**Message(
+        text='На исправление!',
         channel=channels['MODERATORS'],
-        blocks=[{
-            'type': 'section',
-            'text': {
-                'type': 'mrkdwn',
-                'text': f"*{subject}, ответы: {answers_count}* <{question['link']}>\n{reason}"
-            }
-        }, {
-            'type': 'section',
-            'text': {
-                'type': 'mrkdwn',
-                'text': question['content']['filtered']
-            }
-        }, {
-		    'type': 'context',
-		    'elements': [{
-			    'type': 'mrkdwn',
-			    'text': f"Отправлено <@{message['user']}>"
-		    }]
-        }],
-        text='На исправление!'
-    )
+        blocks=[
+            SectionBlock(f"*{subject}, ответы: {answers_count}* <{question['link']}>\n{reason}"),
+            SectionBlock(question['content']['filtered']),
+            ContextBlock(Text(f"Отправлено <@{message['user']}>"))
+        ]
+    ))
 
     await delete_message(channel_id=message['channel'], ts=message['ts'])
 

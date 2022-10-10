@@ -1,4 +1,5 @@
 import re
+from slackblocks import Message, SectionBlock, ContextBlock, Text
 from bot import bot
 from bot.config import channels
 from bot.utils.get_question import get_question
@@ -18,30 +19,14 @@ async def send_to_antispamers(message):
 
     question = question_data['task']
 
-    message_blocks = [{
-        'type': 'section',
-        'text': {
-            'type': 'mrkdwn',
-            'text': f":lower_left_ballpoint_pen: {question.get('subject', '')} {question['link']}"
-        }
-    }, {
-        'type': 'section',
-        'text': {
-            'type': 'mrkdwn',
-            'text': question['content']['short'] or '-'
-        }
-    }, {
-		'type': 'context',
-		'elements': [{
-			'type': 'mrkdwn',
-			'text': f"Отправлено <@{message['user']}>\n{message['text']}"
-		}]
-    }]
-
-    await bot.client.chat_postMessage(
+    await bot.client.chat_postMessage(**Message(
+        text='Снятие отметки нарушения',
         channel=channels['ANTISPAMERS'],
-        blocks=message_blocks,
-        text='Снятие отметки нарушения'
-    )
+        blocks=[
+            SectionBlock(f":lower_left_ballpoint_pen: {question.get('subject', '')} {question['link']}"),
+            SectionBlock(question['content']['short'] or '-'),
+            ContextBlock(Text(f"Отправлено <@{message['user']}>\n{message['text']}"))
+        ]
+    ))
 
     await delete_message(channel_id=message['channel'], ts=message['ts'])
