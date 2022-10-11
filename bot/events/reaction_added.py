@@ -23,10 +23,9 @@ async def handle_reaction_added_event(event, context):
     user_id = user['id']
     channel = event['item']['channel']
     message_ts = event['item']['ts']
-    event_ts = event['event_ts']
+    event_date = ts_to_date(event['event_ts'])
 
     message = context['message']
-
 
     if reaction == 'test_tube' and user_id in admins:
         await delete_message(channel_id=channel, ts=message_ts)
@@ -39,16 +38,14 @@ async def handle_reaction_added_event(event, context):
     if channel == channels['ANTISPAMERS'] and 'bot_profile' in message:
         await delete_message(channel_id=channel, ts=message_ts)
 
-        blocks = message['blocks']
-        user_id = re.search(r"(?<=<@)[A-Z0-9]*", blocks[2]['elements'][0]['text']).group()
-        task_link = re.search(r"https.+(?=>)", blocks[0]['text']['text']).group()
-        sender = await get_user(user_id)
+        # Fetch message data from the text
+        message_parts = message['text'].split(' ')
 
         sheet.worksheet('Принятые репорты').insert_row([
-            task_link,
-            sender['nick'],
+            re.sub(r"<|>", '', message_parts[1]),
+            message_parts[0],
             context['user_nick'],
-            ts_to_date(event_ts)
+            event_date
         ], 2)
     elif channel == channels['HELP']:
         await delete_message(channel_id=channel, ts=message_ts)
@@ -58,7 +55,7 @@ async def handle_reaction_added_event(event, context):
             context['message_user_nick'],
             message['text'],
             context['user_nick'],
-            ts_to_date(event_ts)
+            event_date
         ], 2)
     elif channel == channels['TO_DELETE'] and event['user'] in admins:
         await delete_message(channel_id=channel, ts=message_ts)
@@ -73,7 +70,7 @@ async def handle_reaction_added_event(event, context):
             profile_link.group() if profile_link else '?',
             context['message_user_nick'],
             ts_to_date(message_ts),
-            ts_to_date(event_ts),
+            event_date,
             message_text
         ], 2)
     elif channel == channels['MODERATORS']:

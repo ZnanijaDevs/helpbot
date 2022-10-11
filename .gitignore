@@ -5,3 +5,4 @@ __env__.*
 *.log
 fly.toml
 .env.*
+debug_scripts/

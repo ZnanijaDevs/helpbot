@@ -8,7 +8,7 @@ from bot.utils import find_task_id
 
 
 @bot.message(re.compile(r"снять\s(отметку|нарушение)|:blue_approve:", re.IGNORECASE))
-async def send_to_antispamers(message):
+async def send_to_antispamers(message, context):
     task_id = find_task_id(message['text'])
     if task_id is None:
         return
@@ -20,12 +20,12 @@ async def send_to_antispamers(message):
     question = question_data['task']
 
     await bot.client.chat_postMessage(**Message(
-        text='Снятие отметки нарушения',
+        text=f"{context['user_nick']} {question['link']} - снять нарушение!",
         channel=channels['ANTISPAMERS'],
         blocks=[
             SectionBlock(f":lower_left_ballpoint_pen: {question.get('subject', '')} {question['link']}"),
             SectionBlock(question['content']['short'] or '-'),
-            ContextBlock(Text(f"Отправлено <@{message['user']}>\n{message['text']}"))
+            ContextBlock(Text(f"{message['text']}\nОтправлено <@{message['user']}>")),
         ]
     ))
 
