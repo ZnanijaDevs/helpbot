@@ -20,4 +20,3 @@ sentry_sdk.init(
     traces_sample_rate=0.5,
     before_send=before_send
 )
-# pip install git+https://github.com/vlaex/slackblocks.git@master
