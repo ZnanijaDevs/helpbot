@@ -5,9 +5,9 @@ from bot.config import channels, PROFILE_LINK_REGEX
 from bot.utils import get_delete_reason
 
 
-async def filter_messages(event):
+async def filter_messages(event) -> bool:
     if event.get('subtype') != 'message_deleted' or event['channel'] != channels['TO_DELETE']:
-        return
+        return False
 
     return get_delete_reason(event['previous_message']['text']) != ''
 

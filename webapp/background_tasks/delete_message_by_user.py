@@ -20,11 +20,9 @@ async def delete_message_by_user(user_id: int):
             await bot.client.reactions_add(
                 token=env('SLACK_USER_TOKEN'),
                 channel=channels['TO_DELETE'],
-                name='bug',
+                name='magic_wand',
                 timestamp=ts,
             )
-
-            redis.delete(key)
         except SlackApiError as exc:
             logging.error(
                 'Failed to add a reaction to a message with ts %s: %s',
