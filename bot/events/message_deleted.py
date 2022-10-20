@@ -6,7 +6,11 @@ from bot.utils import get_delete_reason
 
 
 async def filter_messages(event) -> bool:
-    if event.get('subtype') != 'message_deleted' or event['channel'] != channels['TO_DELETE']:
+    if (
+        event.get('subtype') != 'message_deleted' or
+        event['channel'] != channels['TO_DELETE'] or
+        'previous_message' not in event
+    ):
         return False
 
     return get_delete_reason(event['previous_message']['text']) != ''

@@ -3,7 +3,9 @@ import sentry_sdk
 
 
 IGNORED_EXCEPTIONS = [
-    "'NoneType' object has no attribute 'status'"
+    "'NoneType' object has no attribute 'status'",
+    'thread_not_found',
+    'message_not_found'
 ]
 
 
