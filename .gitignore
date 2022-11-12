@@ -1,8 +1,8 @@
 __pycache__/
 .venv/
-__old/
 __env__.*
 *.log
 fly.toml
 .env.*
 debug_scripts/
+__old*
