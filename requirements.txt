@@ -1,4 +1,4 @@
-slack-bolt~=1.15.5
+slack-bolt~=1.16.1
 uvicorn~=0.20.0
 fastapi==0.88.0
 jinja2==3.1.2
