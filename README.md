@@ -23,10 +23,7 @@ CHANNEL_TO_DELETE_ID=C03FYSX0N3U
 CHANNEL_MODERATORS_ID=C03KCFD812B
 
 # Redis config
-REDIS_HOST=localhost
-REDIS_PORT=15574
-REDIS_PASS=123456789abcwfhiweihr
-REDIS_USERNAME=admin
+REDIS_DB_URL = "redis://admin:12345@localhost:15574"
 
 # Google Sheets config [use Google service account to access Sheets API]
 SERVICE_ACCOUNT_PRIVATE_KEY_ID=123456789abcwfhiweihr
