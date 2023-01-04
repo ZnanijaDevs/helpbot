@@ -2,11 +2,10 @@ import redis as r
 from getenv import env
 
 
-redis = r.Redis(
-    host=env('REDIS_HOST'),
-    port=env('REDIS_PORT'),
-    password=env('REDIS_PASS'),
-    username=env('REDIS_USERNAME'),
+MAX_CONNECTIONS = 15
+
+redis = r.Redis.from_url(
+    url=env('REDIS_DB_URL'),
     db=0,
-    max_connections=15
+    max_connections=MAX_CONNECTIONS
 )

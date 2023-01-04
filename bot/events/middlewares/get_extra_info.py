@@ -4,8 +4,12 @@ from bot.utils.get_user import get_user
 
 @bot.use
 async def get_extra_info(context, payload, next):
-    if 'user' in payload:
-        slack_user = await get_user(payload['user'])
+    user: dict | str | None = payload.get('user')
+
+    if user is not None:
+        user_id = user['id'] if isinstance(user, dict) else user
+
+        slack_user = await get_user(user_id)
 
         context['user_data'] = slack_user
         context['user_nick'] = slack_user['nick']
