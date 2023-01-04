@@ -13,18 +13,16 @@ async def send_to_antispamers(message, context):
     if task_id is None:
         return
 
-    question_data = get_question(task_id)
-    if question_data is None:
+    question = get_question(task_id)
+    if question is None:
         return
-
-    question = question_data['task']
 
     await bot.client.chat_postMessage(**Message(
         text=f"{context['user_nick']} {question['link']} - снять нарушение!",
         channel=channels['ANTISPAMERS'],
         blocks=[
             SectionBlock(f":lower_left_ballpoint_pen: {question.get('subject', '')} {question['link']}"),
-            SectionBlock(question['content']['short'] or '-'),
+            SectionBlock(question['short_content'] or '-'),
             ContextBlock(Text(f"{message['text']}\nОтправлено <@{message['user']}>")),
         ]
     ))

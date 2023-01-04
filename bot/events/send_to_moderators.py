@@ -17,14 +17,11 @@ async def send_to_moderators(message, context):
     if task_id is None or reason is None:
         return
 
-    question_data = get_question(task_id)
-
-    if question_data is None:
+    question = get_question(task_id)
+    if question is None:
         return
 
-    question = question_data['task']
-    answers_count = question_data['responses_count']
-
+    answers_count = question['answers_count']
     subject = question.get('subject', '')
     reason = reason.group().strip()
 
@@ -33,7 +30,7 @@ async def send_to_moderators(message, context):
         channel=channels['MODERATORS'],
         blocks=[
             SectionBlock(f"*{subject}, ответы: {answers_count}* <{question['link']}>\n{reason}"),
-            SectionBlock(question['content']['filtered']),
+            SectionBlock(question['filtered_content']),
             ContextBlock(Text(f"Отправлено <@{message['user']}>"))
         ]
     ))
