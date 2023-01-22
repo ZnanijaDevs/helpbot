@@ -1,3 +1,5 @@
+### We moved the bot to https://github.com/ZnanijaDevs/mrrobot
+
 # helpbot
 
 This bot is designed for the Slack workspace for our moderation team.
